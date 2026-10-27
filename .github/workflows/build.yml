@@ -1,0 +1,21 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: macos-26
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build for the iOS Simulator
+        run: |
+          xcodebuild -version
+          xcodebuild build \
+            -project PhotoSwipe.xcodeproj \
+            -target PhotoSwipe \
+            -configuration Debug \
+            -sdk iphonesimulator \
+            CODE_SIGNING_ALLOWED=NO
